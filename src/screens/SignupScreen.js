@@ -1,17 +1,24 @@
 import React from 'react';
 import {View, StyleSheet, } from 'react-native';
 import {Text, Input, Button} from 'react-native-elements';
+import Spacer from '../components/Spacer';
 
 const SignupScreen = ({ navigation }) => {
     return(
         <>
-            <Text h3>Sign Up for Tracker</Text>
+            <Spacer>
+                <Text h3>Sign Up for Tracker</Text>
+            </Spacer>
+
             <Input label= 'Email'
                     placeholder='asdf'></Input>
-            <Input label= 'Password'
-                    placeholder='asdf'></Input>
-            <Button title="Sign Up"></Button>
-            
+
+            <Spacer />
+                <Input label= 'Password'
+                        placeholder='asdf'></Input>
+            <Spacer>
+                <Button title="Sign Up"></Button>
+            </Spacer>
         </>
     )
     };

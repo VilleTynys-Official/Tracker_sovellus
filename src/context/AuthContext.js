@@ -1,4 +1,5 @@
 import createDataContext from './createDataContext';
+import trackerApi from '../api/tracker';
 
 
 
@@ -11,15 +12,19 @@ const authReducer = (state, action) => {
 };
 
 //rakennetaan actionit joita kutsutaan
-
-const signup = (dispatch) => {
-    //tätä kutsutaan komponentista
-    return({ email, password }) => {
+//dispatch vastaanottaa "globaalin" kutsun.
+const signup =  (dispatch) => {
+    return async ({ email, password }) => {
         //make api request to sign up with that email and password
-
         //jos sign up onnistui, muutetaan tilaa
-
         //jos singup epäonnistui
+        try {
+            const response = await trackerApi.post('/signup', { email, password});
+            console.log(response.data);
+        } catch (err){
+            console.log(err.message);
+
+        };
     };
 };
 
@@ -33,7 +38,7 @@ const signin = (dispatch) =>{
     };
 };
 
-const signout = (dispatch) =>{
+const signout = dispatch =>{
     return () => {
         //kirjaudutaan ulos jotenkin
     };
@@ -41,9 +46,8 @@ const signout = (dispatch) =>{
 
 
 //hyödynnetään createDataContext komponenttia ja luodaan Contexti, jossa on sisäänkirjautumiseen liittyvät tilat ja funktiot.
-export const{ Provider, Context} = createDataContext(
+export const { Provider, Context} = createDataContext(
     authReducer,
-    {},
     { signin, signout, signup },
     { isSignedIn: false}
 )

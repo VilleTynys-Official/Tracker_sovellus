@@ -11,6 +11,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
+import { Provider as AuthProvider } from './src/context/AuthContext';
 
 //STICHING TOGETHER THE NAVIGATORS
 //switch on ylin navigaatio täs sovelluksessa.
@@ -30,4 +31,15 @@ const switchNavigator = createSwitchNavigator({
   })
 });
 
-export default createAppContainer(switchNavigator);
+
+
+const App= createAppContainer(switchNavigator);
+
+//otetaan Authprovider parentiksi koko sovellukselle. (jotta kaikki pääsevät siihen käsiksi)
+export default () =>{
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  )
+} 

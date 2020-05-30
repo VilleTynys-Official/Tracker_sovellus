@@ -43,7 +43,7 @@ const SignupScreen = ({ navigation }) => {
     //kumotaan navigationin perusasetus.
     SignupScreen.navigationOptions = () => {
         return {
-            header: null
+            headerShown: false
         };
     };
 

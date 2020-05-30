@@ -6,13 +6,13 @@ import React, { useReducer } from "react";
 export default (reducer, actions, defaultValue) =>{
     const Context = React.createContext();
 
-
     //dispatchia kutsutaan jollain actionilla ja päivittää tilan..
 
 
     const Provider = ({ children}) => {
         const [state, dispatch] = useReducer(reducer, defaultValue); //provider on niinku wrapperi eri stateille ja niitä muuttaville funktioille.
-
+        
+        
         const boundActions = {};
         for (let key in actions) {
             boundActions[key] = actions[key](dispatch);
@@ -22,10 +22,10 @@ export default (reducer, actions, defaultValue) =>{
             <Context.Provider value={{ state, ...boundActions}}>
                 {children}
             </Context.Provider>
-        )
+        );
     };
 
 
-    return { Context, Provider};
+    return { Context, Provider };
 };
 

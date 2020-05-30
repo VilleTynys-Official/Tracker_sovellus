@@ -1,4 +1,6 @@
 import React, { useReducer } from "react";
+//tällä komponentilla siis luodaan Contexteja (joissa on statet ja funktiot joilla stateja voi muuttaa)
+
 
 
 export default (reducer, actions, defaultValue) =>{
@@ -6,9 +8,10 @@ export default (reducer, actions, defaultValue) =>{
 
 
     //dispatchia kutsutaan jollain actionilla ja päivittää tilan..
-    //Provider on apukomponentti
+
+
     const Provider = ({ children}) => {
-        const [state, dispatch] = useReducer(reducer, defaultValue);
+        const [state, dispatch] = useReducer(reducer, defaultValue); //provider on niinku wrapperi eri stateille ja niitä muuttaville funktioille.
 
         const boundActions = {};
         for (let key in actions) {

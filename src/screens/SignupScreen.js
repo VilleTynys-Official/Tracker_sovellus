@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet } from 'react-native';
-import {Text, Input, Button} from 'react-native-elements';
+import {Text, Input, Button} from 'react-native-elements'; //helpottaa stylingiä..?
 import Spacer from '../components/Spacer';
-
-
-
 
 
 
@@ -41,7 +38,7 @@ const SignupScreen = ({ navigation }) => {
         </View>
     )
 };
-
+    //kumotaan navigationin perusasetus.
     SignupScreen.navigationOptions = () => {
         return {
             header: null

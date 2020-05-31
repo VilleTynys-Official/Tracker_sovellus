@@ -1,6 +1,7 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import {AsyncStorage} from 'react-native';
 import createDataContext from './createDataContext';
 import trackerApi from '../api/tracker';
+import {navigate} from '../navigationRef';
 
 
 
@@ -26,8 +27,14 @@ const signup =  (dispatch) => async ({ email, password }) => {
         try {
             const response = await trackerApi.post('/signup', { email, password});
             await AsyncStorage.setItem( 'token', response.data.token) //tallennetaan token puhelimen muistiin.
-            dispatch({ type: 'signup', payload: response.data.token})
-        } catch (err){
+            dispatch({ type: 'signup', payload: response.data.token}) //update the state
+            // console.log('token tallennettu stateen ja cacheen.')
+            
+            //navigate to main flow
+            navigate('TrackList')
+
+        }catch(err){
+            console.log(err)
             dispatch({ type: 'add_error', payload: 'Something went wrong with signup'
             });
     };

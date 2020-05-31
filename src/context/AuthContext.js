@@ -1,17 +1,19 @@
 import {AsyncStorage} from 'react-native';
 import createDataContext from './createDataContext';
 import trackerApi from '../api/tracker';
-import {navigate} from '../navigationRef';
+import {navigate} from '../navigationRef'; //itse rakennettu globaali navigaatio
 
 
-
+//REDUCER!!!!!!!
 //dispatch suorittaa tämän reducerin (eli muuttaa statea actionin (type ja payload) mukaisesti):
 const authReducer = (state, action) => {
     switch (action.type) {
         case 'add_error':
             return {...state, errorMessage: action.payload};  //jos tulee error nii stateen heitetään päällimmäiseksi payload.
-        case 'signup':
-            return { errorMessage: '', token: action.payload }; //nollaa errorMessagen ja asettaa tokenin stateen.
+        case 'signin': 
+            return { errorMessage: '', token: action.payload }; //nollaa errorMessagen ja asettaa tokenin stateen.        
+        case 'signup': 
+            return { errorMessage: '', token: action.payload }; 
         default:
             return state;
     }
@@ -35,20 +37,34 @@ const signup =  (dispatch) => async ({ email, password }) => {
 
         }catch(err){
             console.log(err)
-            dispatch({ type: 'add_error', payload: 'Something went wrong with signup'
+            dispatch({ 
+                type: 'add_error',
+                payload: 'Something went wrong with signup'
             });
     };
 };
 
-const signin = (dispatch) =>{
-    return ({ email, password}) =>{
+
+
+const signin = (dispatch) => async ({ email, password}) =>{
         //api request
-
         //handle success
-
         //handle fail
+        try{
+            const response = await trackerApi.post('/signin', { email, password});
+            await AsyncStorage.setItem('token', response.data.token); //key ja value
+            dispatch({ type: 'signin', payload: response.data.token});
+            //kun valmis, navigoidaan main flowiin.
+            navigate('TrackList')
+
+
+        }catch(err){
+            dispatch({
+                type: 'add_error',
+                payload: 'Something went wrong with sign in.'
+            });
+        }
     };
-};
 
 const signout = dispatch =>{
     return () => {

@@ -14,12 +14,19 @@ const authReducer = (state, action) => {
             return { errorMessage: '', token: action.payload }; //nollaa errorMessagen ja asettaa tokenin stateen.        
         case 'signup': 
             return { errorMessage: '', token: action.payload }; 
+        case 'clear_error_message': 
+            return { ...state, errorMessage:'' }; 
         default:
             return state;
     }
 };
 
 //..USING IMPLICIT RETURN FUNCTIONS (Returnia ei tarvii kirjoittaa)
+const clearErrorMessage = dispatch => () => {
+    dispatch({ type: 'clear_error_message'})
+};
+
+
 
 //rakennetaan actionit joita kutsutaan
 const signup =  (dispatch) => async ({ email, password }) => {
@@ -76,6 +83,6 @@ const signout = dispatch =>{
 //hyödynnetään createDataContext komponenttia ja luodaan Contexti, jossa on sisäänkirjautumiseen liittyvät tilat ja funktiot.
 export const { Provider, Context} = createDataContext(
     authReducer,
-    { signin, signout, signup },
+    { signin, signout, signup, clearErrorMessage },
     { token: null, errorMessage: ''}
 );

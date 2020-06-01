@@ -13,7 +13,9 @@ const authReducer = (state, action) => {
         case 'signin': 
             return { errorMessage: '', token: action.payload }; //nollaa errorMessagen ja asettaa tokenin stateen.        
         case 'signup': 
-            return { errorMessage: '', token: action.payload }; 
+            return { errorMessage: '', token: action.payload };
+        case 'signout': 
+            return { token: null, errorMessage: '' }; 
         case 'clear_error_message': 
             return { ...state, errorMessage:'' }; 
         default:
@@ -21,9 +23,12 @@ const authReducer = (state, action) => {
     }
 };
 
+
+
+
+
+
 //..USING IMPLICIT RETURN FUNCTIONS (Returnia ei tarvii kirjoittaa)
-
-
 //katsotaan löytyykö token cachesta.
 const tryLocalSignin = dispatch => async () =>{
     const token = await AsyncStorage.getItem('token');
@@ -88,10 +93,11 @@ const signin = (dispatch) => async ({ email, password}) =>{
         }
     };
 
-const signout = dispatch =>{
-    return () => {
-        //kirjaudutaan ulos jotenkin
-    };
+
+const signout = dispatch => async () => {
+    await AsyncStorage.removeItem('token')
+    dispatch({type: 'signout'})
+    navigate('loginFlow');
 };
 
 

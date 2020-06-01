@@ -3,15 +3,16 @@ import {View, StyleSheet } from 'react-native';
 import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
 import {Context} from '../context/AuthContext';
+import {NavigationEvents} from 'react-navigation'; //react komponentti, joka kuuntelee milloin tulee navigation event..
 
 const SigninScreen = () => {
-    const {state, signin} = useContext(Context);
-
-
-
-
+    const {state, signin, clearErrorMessage} = useContext(Context);
+    console.log(clearErrorMessage)
+    //navigation events suoriutuu aina kun sivulle navigoidaan. (tyhjentää errorMessagen AuthContextista)
     return(
         <View style={styles.container}>
+            <NavigationEvents
+                onWillFocus ={clearErrorMessage}/>
             <AuthForm 
                 headerText='Sign in to your Account'
                 errorMessage= {state.errorMessage}

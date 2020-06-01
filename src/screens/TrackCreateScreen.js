@@ -1,8 +1,12 @@
+import '../_mockLocations'; //tää simuloi locationin muutokset.
 import React, {useEffect, useState} from 'react';
 import { StyleSheet} from 'react-native';
 import { Text} from 'react-native-elements';
 import { SafeAreaView} from 'react-navigation';
-import { requestPermissionsAsync } from 'expo-location';
+import {
+        requestPermissionsAsync,
+        watchPositionAsync,
+        Accuracy } from 'expo-location';
 import Map from '../components/Map';
  
 
@@ -10,10 +14,15 @@ import Map from '../components/Map';
 const TrackCreateScreen = () => {
     const [err, setErr] =useState(null);
 
-
     const startWatching = async () =>{
         try{
-            await requestPermissionsAsync();
+            await requestPermissionsAsync(); //pyydetään lupa
+            await watchPositionAsync({    
+                accuracy: Accuracy.BestForNavigation,
+                timeInterval: 1000, // joka sekunti
+                distanceInterval: 10 // tai joka kymmenes metri
+            }, (location) => {
+                console.log(location)});   //expo-location librarystä location.
         }catch(e){
             setErr(e);
         }

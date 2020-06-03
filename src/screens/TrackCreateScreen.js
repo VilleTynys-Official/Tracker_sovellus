@@ -6,10 +6,13 @@ import { SafeAreaView, withNavigationFocus} from 'react-navigation'; //..higher 
 import Map from '../components/Map';
 import { Context as LocationContext} from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
- 
+import TrackForm from '../components/TrackForm';
+
+
 const TrackCreateScreen = ({ isFocused }) => {  //isFocused saadaan higher order funktiosta.
     const {addLocation} =useContext(LocationContext);
     const [err] = useLocation( isFocused, addLocation) //kutsutaan useLocationia. Jos error nii otetaan se vastaan (muuten location toteuttaa addLocationin)
+    console.log(err)
 
     return (
         <SafeAreaView forceInset= {{top: 'always'}}>
@@ -17,6 +20,7 @@ const TrackCreateScreen = ({ isFocused }) => {  //isFocused saadaan higher order
             <Map />
 
             {err ? <Text>Please enable location services</Text> : null}
+            <TrackForm/>
         </SafeAreaView>
     );
 };

@@ -9,9 +9,8 @@ import useLocation from '../hooks/useLocation';
  
 const TrackCreateScreen = ({ isFocused }) => {  //isFocused saadaan higher order funktiosta.
     const {addLocation} =useContext(LocationContext);
-    const [err] = useLocation(addLocation) //kutsutaan useLocationia. Jos error nii otetaan se vastaan (muuten location toteuttaa addLocationin)
+    const [err] = useLocation( isFocused, addLocation) //kutsutaan useLocationia. Jos error nii otetaan se vastaan (muuten location toteuttaa addLocationin)
 
-    console.log(isFocused)
     return (
         <SafeAreaView forceInset= {{top: 'always'}}>
             <Text h2>TrackCreateScreen</Text>

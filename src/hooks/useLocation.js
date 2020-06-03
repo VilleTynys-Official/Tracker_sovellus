@@ -12,8 +12,6 @@ import {
 export default (shouldTrack, callback) => { //shouldTrack on isFocused propsi.
     const [err, setErr] =useState(null);
     const [subscriber, setSubscriber] = useState(null);
- 
-    console.log( shouldTrack)
 
     const startWatching = async () =>{
         try{

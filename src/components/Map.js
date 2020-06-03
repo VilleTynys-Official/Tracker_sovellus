@@ -7,7 +7,7 @@ import {Context as LocationContext} from '../context/LocationContext';
 
 const Map = () => {
     const { state: {currentLocation} } = useContext(LocationContext);
-    const {isFollowing, setFollowing} = useState(true);
+
     //console.log(currentLocation.coords);
 
     if(!currentLocation){
@@ -38,7 +38,6 @@ const Map = () => {
                 />
             </MapView>
         
-            <Button title={isFollowing? 'Follow location': 'Unfollow location'}/>
         </>)
 
 }

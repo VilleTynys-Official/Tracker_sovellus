@@ -26,4 +26,4 @@ setInterval(() => {
         location: getLocation(counter)
     });
     counter++;
-}, 5000);
+}, 3000);

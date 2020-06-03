@@ -12,7 +12,6 @@ import TrackForm from '../components/TrackForm';
 const TrackCreateScreen = ({ isFocused }) => {  //isFocused saadaan higher order funktiosta.
     const {addLocation} =useContext(LocationContext);
     const [err] = useLocation( isFocused, addLocation) //kutsutaan useLocationia. Jos error nii otetaan se vastaan (muuten location toteuttaa addLocationin)
-    console.log(err)
 
     return (
         <SafeAreaView forceInset= {{top: 'always'}}>

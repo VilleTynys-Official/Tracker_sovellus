@@ -1,31 +1,32 @@
-import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-import MapView, {Polyline} from 'react-native-maps'; 
+import React, {useContext} from 'react';
+import {Text, StyleSheet, ActivityIndicator} from 'react-native';
+import MapView, {Polyline} from 'react-native-maps';
+import {Context as LocationContext} from '../context/LocationContext';
+
 
 
 const Map = () => {
-    let points = [];
-    for (let i = 0; i < 20; i++){
-        points.push({
-            latitude: 37.3233 + i * 0.001,
-            longitude: -122.03121 + i * 0.001
-        });
-    };
+    const { state: {currentLocation} } = useContext(LocationContext);
+    //console.log(currentLocation.coords);
 
-
+    if(!currentLocation){
+        return <ActivityIndicator size= 'large' style={{ marginTop: 200 }}/> //näyttää spinnerin kun ei sijaintia..
+    }
 
     return <MapView
                 style={style.map}
                 initialRegion={{
-                    latitude: 37.33233,
-                    longitude: -122.03121,
-                    latitudeDelta: 0.01,
+                    ...currentLocation.coords,
+                    latitudeDelta: 0.01, //Deltas are for "zooming"
                     longitudeDelta: 0.01
                 }}
+                region={{ //keskittää kartan aina kun päivittyy.
+                    ...currentLocation.coords,          
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01 }}
+
+
             >
-                <Polyline coordinates={points}
-                            strokeWidth={30} 
-                            strokeColor='pink' />
             </MapView>
              
 

@@ -10,6 +10,7 @@ import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Provider as LocationProvider} from './src/context/LocationContext';
 import { setNavigator} from './src/navigationRef';
 
 //STICHING TOGETHER THE NAVIGATORS
@@ -36,12 +37,16 @@ const switchNavigator = createSwitchNavigator({
 
 const App= createAppContainer(switchNavigator);
 
+
 //otetaan Authprovider parentiksi koko sovellukselle. (jotta kaikki pääsevät siihen käsiksi)
+//Location Provider myös..
 export default () =>{
   return (
-    <AuthProvider>
-      {/* annetaan navigointi kaikille navigationRef avulla. */}
-      <App ref={ (navigator) => {setNavigator(navigator)}} />    
-    </AuthProvider>
+    <LocationProvider>
+      <AuthProvider>
+        {/* annetaan navigointi kaikille navigationRef avulla. */}
+        <App ref={ (navigator) => {setNavigator(navigator)}} />    
+      </AuthProvider>
+    </LocationProvider>
   )
 } 

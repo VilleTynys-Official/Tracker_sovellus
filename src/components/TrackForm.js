@@ -4,15 +4,16 @@ import Spacer from './Spacer';
 import { Context as LocationContext } from '../context/LocationContext';
 
 const TrackForm = () => {
-    const { state: { name, recording },
+    const { state: { name, recording, locations },
         startRecording,
         stopRecording,
         changeName
             } = useContext(LocationContext);
     
+
     // console.log('***')
     // console.log(recording);
-
+    console.log(locations.length)
     return (
         <>
             <Spacer>

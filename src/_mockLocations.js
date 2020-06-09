@@ -13,7 +13,7 @@ const getLocation = increment => {
             accuracy: 5,
             altitudeAccuracy: 5,
             altitude: 5,
-            longitude: 22.286976 + increment * tenMeterWithDegrees, //aloitetaan Apple HQ:sta ja liikutetaan sieltä eteenpäin
+            longitude: 22.286976 + increment * tenMeterWithDegrees, //kandee plugaa tähä osoite jossa devailet nii kartta ei hypi liikaa.
             latitude: 60.462666 + increment * tenMeterWithDegrees
         }
     };

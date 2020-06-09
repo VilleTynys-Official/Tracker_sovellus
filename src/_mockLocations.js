@@ -13,11 +13,14 @@ const getLocation = increment => {
             accuracy: 5,
             altitudeAccuracy: 5,
             altitude: 5,
-            longitude: -122.0312186 + increment * tenMeterWithDegrees, //aloitetaan Apple HQ:sta ja liikutetaan sieltä eteenpäin
-            latitude: 37.33233141 + increment * tenMeterWithDegrees
+            longitude: 22.286976 + increment * tenMeterWithDegrees, //aloitetaan Apple HQ:sta ja liikutetaan sieltä eteenpäin
+            latitude: 60.462666 + increment * tenMeterWithDegrees
         }
     };
 };
+
+
+60.462666, 22.286976
 
 let counter = 0;
 setInterval(() => {

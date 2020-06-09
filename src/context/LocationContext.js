@@ -7,10 +7,10 @@ const locationReducer = (state, action) =>{
             return{ ...state, currentLocation: action.payload}
         case 'start_recording':
             return{ ...state, recording: true}
-        case 'stopt_recording':
+        case 'stop_recording':
             return{ ...state, recording: false}
         case 'add_location':
-            return{ ...state, locations: [...state.locations, action.payload]}
+            return{ ...state, locations: [...state.locations, action.payload]} //lisätän uudet location tiedot
         case 'change_name':
             return{ ...state, name: action.payload}
         default:    

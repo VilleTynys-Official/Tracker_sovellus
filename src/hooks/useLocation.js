@@ -36,7 +36,7 @@ export default (shouldTrack, callback) => { //shouldTrack on isFocused propsi.
         if (shouldTrack) {
             startWatching()
         } else {
-            // console.log('sammutus luuppi')
+            console.log('sammutus luuppi')
             //ylim. luuppi joka varmistaa et ei ole null koska muuten kaatui.
             if (subscriber) {
                 subscriber.remove(); //tähä pysähtyy..

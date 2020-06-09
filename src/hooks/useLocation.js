@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import {
     Accuracy,
     requestPermissionsAsync,
@@ -10,13 +10,13 @@ import {
 
 
 export default (shouldTrack, callback) => { //shouldTrack on isFocused propsi.
-    const [err, setErr] =useState(null);
+    const [err, setErr] = useState(null);
     const [subscriber, setSubscriber] = useState(null);
 
-    
 
-    const startWatching = async () =>{
-        try{
+
+    const startWatching = async () => {
+        try {
             await requestPermissionsAsync(); //pyydetään lupa
             const sub = await watchPositionAsync(
                 {
@@ -27,18 +27,18 @@ export default (shouldTrack, callback) => { //shouldTrack on isFocused propsi.
                 callback
             );
             setSubscriber(sub);
-        }catch(e){
+        } catch (e) {
             setErr(e);
         }
     };
 
-    useEffect(() =>{
-        if( shouldTrack ){
-             startWatching() 
+    useEffect(() => {
+        if (shouldTrack) {
+            startWatching()
         } else {
             // console.log('sammutus luuppi')
             //ylim. luuppi joka varmistaa et ei ole null koska muuten kaatui.
-            if (subscriber){    
+            if (subscriber) {
                 subscriber.remove(); //tähä pysähtyy..
                 setSubscriber(null)
             }

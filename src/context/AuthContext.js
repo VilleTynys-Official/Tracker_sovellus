@@ -63,7 +63,7 @@ const signup =  (dispatch) => async ({ email, password }) => {
             navigate('TrackList')
 
         }catch(err){
-            console.log(err)
+            console.log('**** errori on: ', err)
             dispatch({ 
                 type: 'add_error',
                 payload: 'Something went wrong with signup'

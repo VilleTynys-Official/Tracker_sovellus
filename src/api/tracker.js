@@ -12,22 +12,22 @@ import { AsyncStorage } from 'react-native';
 
 
 const instance = axios.create({
-    baseURL: 'http://07179f59fcaa.ngrok.io'
+    baseURL: 'http://69e489766200.ngrok.io'
 })
 
 //eka funktio ajetaan aina ku tehdään request (joka yhdistää tokenin urliin)
 //toka aina jos tulee error
 instance.interceptors.request.use(
-    async ( config ) => {        //config sisältää tietoa axiosin kutsusta. Lisätään siihen token headeriksi.
+    async (config) => {        //config sisältää tietoa axiosin kutsusta. Lisätään siihen token headeriksi.
         const token = await AsyncStorage.getItem('token');
-        if(token){
+        if (token) {
             config.headers.Authorization = `Bearer ${token}`
         }
         return config;
     },
-    (err) => { 
+    (err) => {
         return Promise.reject(err);
-     }
+    }
 )
 
 export default instance;

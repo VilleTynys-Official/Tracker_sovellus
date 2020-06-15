@@ -8,6 +8,6 @@ import axios from 'axios';
 //3 päivitä 8h välein!!!!!!!
 
 export default axios.create({
-    baseURL: 'http://b798367e20af.ngrok.io'
+    baseURL: 'http://07179f59fcaa.ngrok.io'
 })
 

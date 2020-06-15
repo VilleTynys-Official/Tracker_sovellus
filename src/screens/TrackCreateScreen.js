@@ -1,4 +1,4 @@
-// import '../_mockLocations'; //tää simuloi locationin muutokset.
+import '../_mockLocations'; //tää simuloi locationin muutokset.
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';

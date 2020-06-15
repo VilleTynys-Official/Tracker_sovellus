@@ -1,7 +1,12 @@
 import * as Location from 'expo-location'; //tähti tuo kaikki funktiot mukana..
 
-//tää scripti feikkaa et käyttäjä liikkuisi.
-
+/**GPS SIMULOIJA:
+ * tää scripti feikkaa et käyttäjä liikkuisi. Scripti latautuu kun sovellus käynnistyy ja alkaa puskemaan feikki gps-sijaintia.
+ * 
+ * 
+ * 
+ * 
+*/
 const tenMeterWithDegrees = 0.0001;
 
 const getLocation = increment => { 
@@ -20,7 +25,6 @@ const getLocation = increment => {
 };
 
 
-60.462666, 22.286976
 
 let counter = 0;
 setInterval(() => {

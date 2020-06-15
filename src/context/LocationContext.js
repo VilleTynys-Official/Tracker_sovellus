@@ -30,7 +30,9 @@ const stopRecording = dispatch => () => {
     dispatch ({ type: 'stop_recording'});
 };
 const addLocation = dispatch => (location, recording) => {
-    console.log('Tracking location....');
+    //huom et seuraa kokoajan koska simulointi lähettää gps dataa kokoajan.
+    // jatkuvan seurannan pitäisi loppua kun gps dataa ei enää simuloida.
+    console.log('Sovellus saa gps sijainnin ja päivittää sen stateen.');
     dispatch({ type: 'add_current_location', payload: location })
     if(recording){
         dispatch ({ type: 'add_location', payload: location})

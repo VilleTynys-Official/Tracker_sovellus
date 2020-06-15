@@ -4,46 +4,50 @@ import {
     requestPermissionsAsync,
     watchPositionAsync
 } from 'expo-location';
-
+  
 //user locationin trackingiin liittyvä business logiikka.
 
 
 
-export default (shouldTrack, callback) => { //shouldTrack on isFocused propsi.
+export default (isFocused, recording, callback) => {
     const [err, setErr] = useState(null);
-    const [subscriber, setSubscriber] = useState(null);
+    // console.log('****isFocused', isFocused, 'and recording:', recording);
 
 
 
-    const startWatching = async () => {
-        try {
-            await requestPermissionsAsync(); //pyydetään lupa
-            const sub = await watchPositionAsync(
-                {
-                    accuracy: Accuracy.BestForNavigation,
-                    timeInterval: 1000, // joka sekunti
-                    distanceInterval: 10 // tai joka kymmenes metri
-                },
-                callback
-            );
-            setSubscriber(sub);
-        } catch (e) {
-            setErr(e);
-        }
-    };
-
+    // Muista useEffect 3 kultaista sääntöä!
     useEffect(() => {
-        if (shouldTrack) {
+        let subscriber; //ei tarvitse lisätä dependencyihin (stateen) koska localized (käytetään vain täs hookissa)
+        const startWatching = async () => {
+            try {
+                await requestPermissionsAsync(); //pyydetään lupa
+                const subscriber = await watchPositionAsync(
+                    {
+                        accuracy: Accuracy.BestForNavigation,
+                        timeInterval: 1000, // joka sekunti
+                        distanceInterval: 10 // tai joka kymmenes metri
+                    },
+                    callback
+                );
+                // console.log('****** Subscriberin tila (joka palautui TrackCreateScreenin callback funktioon) on:', subscriber)
+            } catch (e) {
+                setErr(e);
+            }
+        };
+
+        if (isFocused || recording) {
             startWatching()
+            console.log('tämän tekstin pitää näkyy vain kun focused tai tracking.')
         } else {
             console.log('sammutus luuppi')
             //ylim. luuppi joka varmistaa et ei ole null koska muuten kaatui.
             if (subscriber) {
                 subscriber.remove(); //tähä pysähtyy..
-                setSubscriber(null)
+                }
+                subscriber=null;
             }
-        }
-    }, [shouldTrack]); //ajetaan funktio aina jos shouldTrack muuttuu.
+            
+    }, [isFocused, recording]); //ajetaan funktio aina jos isFocused tai recording muuttuu.
 
     return [err] //array koska yleinen käytäntö..
 

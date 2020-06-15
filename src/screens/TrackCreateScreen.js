@@ -14,10 +14,16 @@ const TrackCreateScreen = ({ isFocused }) => {  //isFocused saadaan higher order
 
     const { state, addLocation } = useContext(LocationContext);
 
+    // console.log('OUTSIDE:', state.recording)
+
     //kutsutaan useLocation locationilla. callback on addLocation. Jos se palauttaa [err] nii otetaan se vastaan.
-    const [err] = useLocation(isFocused, (location) => {
-        addLocation(location, state.recording); //tämä tehdään näin koska uselocationiin ei anneta Contextia..
-    })
+    const [err] = useLocation(isFocused,
+        state.recording,
+        (location) => {
+            // console.log('INSIDE: ', state.recording)
+            addLocation(location, state.recording); //tämä tehdään näin koska uselocationiin ei anneta Contextia..
+            
+        })
 
     return (
         <SafeAreaView forceInset={{ top: 'always' }}>

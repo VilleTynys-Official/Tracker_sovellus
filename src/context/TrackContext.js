@@ -1,8 +1,9 @@
 import createDataContext from './createDataContext';
+import trackerApi from '../api/tracker';
 
 const trackReducer = (state, action) => {
-    switch (action.type){
-        case 'action_yggönen':{
+    switch (action.type) {
+        case 'action_yggönen': {
             return state
         }
         default:
@@ -11,13 +12,16 @@ const trackReducer = (state, action) => {
 };
 
 
-const fetchTrack =dispatch => () =>{};
-const createTrack = dispatch => (name, locations) =>{
-    console.log('apiin luodaan track jonka tiedot ovat:', name, locations.length);
+const fetchTrack = dispatch => () => { };
+
+//hyödynnetään tokenia.
+const createTrack = dispatch => async (name, locations) => {
+    // console.log('*** tallennetaan track tiedoiksi :', name, locations)
+    await trackerApi.post('/tracks', { name, locations });
 };
 
-export const { Provider, Context} = createDataContext(
+export const { Provider, Context } = createDataContext(
     trackReducer,
-    { fetchTrack, createTrack},
+    { fetchTrack, createTrack },
     []
 );

@@ -1,4 +1,4 @@
-import '../_mockLocations'; //tää simuloi locationin muutokset.
+// import '../_mockLocations'; //tää simuloi locationin muutokset.
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
@@ -12,17 +12,18 @@ import TrackForm from '../components/TrackForm';
 const TrackCreateScreen = ({ isFocused }) => {  //isFocused saadaan higher order funktiosta.
     // console.log(isFocused);
 
-    const { state, addLocation } = useContext(LocationContext);
+    const { state: { recording }, addLocation } = useContext(LocationContext);
 
-    // console.log('OUTSIDE:', state.recording)
+    // console.log('OUTSIDE:', recording)
 
     //kutsutaan useLocation locationilla. callback on addLocation. Jos se palauttaa [err] nii otetaan se vastaan.
-    const [err] = useLocation(isFocused,
-        state.recording,
+    const [err] = useLocation(
+        isFocused,
+        recording,
         (location) => {
-            // console.log('INSIDE: ', state.recording)
-            addLocation(location, state.recording); //tämä tehdään näin koska uselocationiin ei anneta Contextia..
-            
+            // console.log('INSIDE: ', recording)
+            addLocation(location, recording); //tämä tehdään näin koska uselocationiin ei anneta Contextia..
+
         })
 
     return (

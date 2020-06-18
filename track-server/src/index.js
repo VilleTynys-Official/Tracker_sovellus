@@ -50,6 +50,6 @@ app.get('/', requireAuth, (req, res)=>{
 });
 
 
-app.listen(3001,()=>{
-    console.log('listening port 3001')
+app.listen(8080,()=>{
+    console.log('listening port 8080')
 });

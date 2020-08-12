@@ -2,8 +2,8 @@
 GPS Tracker that is built with help of a Udemy course to practice some interesting consepts and technologies like:
 
 - React & Expo
-- Express.js
-- MongoDB
+- Express.js, nodemon
+- MongoDB, mongoose
 - JSON Web Tokens for password encryption
 - React Navigation
 - React location and data-base for locations

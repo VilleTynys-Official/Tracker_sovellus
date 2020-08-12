@@ -12,7 +12,7 @@ import { AsyncStorage } from 'react-native';
 
 
 const instance = axios.create({
-    baseURL: 'http://69e489766200.ngrok.io'
+    baseURL: 'http://775def7f94fd.ngrok.io'
 })
 
 //eka funktio ajetaan aina ku tehdään request (joka yhdistää tokenin urliin)
